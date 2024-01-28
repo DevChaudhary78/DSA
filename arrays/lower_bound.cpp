@@ -3,21 +3,24 @@
 
 using namespace std;
 
-int binary_search(vector<int> arr, int start, int mid, int end, int val) {
-  if (arr[mid] == val) {
-    return arr[mid];
-  }
-
-  else if (arr[mid] < val) {
-  }
-  return 0;
-}
-
 int lower_bound(vector<int> arr, int val) {
-  // considering edge case that no lower bound is found
-  if (arr[0] > val) {
-    return -1;
+  int start = 0;
+  int end = arr.size() - 1;
+
+  int answer = -1;
+
+  while (start <= end) {
+    int mid = (start + end) / 2;
+    if (arr[mid] <= val) {
+      answer = arr[mid];
+
+      start = mid + 1;
+    } else {
+      end = mid - 1;
+    }
   }
+
+  return answer;
 }
 
 int main() {
