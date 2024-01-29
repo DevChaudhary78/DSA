@@ -1,23 +1,24 @@
 #include "stdio.h"
+#include <algorithm>
 #include <vector>
 using namespace std;
 
 vector<int> kRotate(vector<int> arr, int k) {
-  vector<int> ans;
-  for (int i = arr.size() - k; i < arr.size(); i++) {
-    ans.push_back(arr[i]);
-  }
+  int n = arr.size();
+  k = k % n;
 
-  for (int i = 0; i < arr.size() - k; i++) {
-    ans.push_back(arr[i]);
-  }
+  reverse(arr.begin(), arr.begin() + n - k);
+  reverse(arr.begin() + n - k, arr.end());
 
-  return ans;
+  reverse(arr.begin(), arr.end());
+
+  return arr;
 }
 
 int main() {
   vector<int> arr = {1, 3, 5, 7, 9};
-  vector<int> ans = kRotate(arr, 2);
+  vector<int> ans = kRotate(arr, 12);
+  // vector<int> ans = kRotate(arr, 2);
 
   for (int x : ans) {
     printf("%d ", x);
